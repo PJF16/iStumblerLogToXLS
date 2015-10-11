@@ -8,6 +8,7 @@ package istumberlogtoxls;
 import static java.awt.PageAttributes.MediaType.D;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 
@@ -22,8 +23,13 @@ public class IStumberLogtoXLS {
      */
     public static void main(String[] args) throws IOException, BiffException, WriteException {
         ReadFileAndAnalyse rf = new ReadFileAndAnalyse ();
+        Scanner scanner = new Scanner (System.in);
         ArrayList<WiFiPoint> points;
-        points = rf.read("D:\\downloads\\log.log");
+        String filepath;
+        System.out.println("Bitte geben Sie den kompletten Pfad zur Logdatei ein: ");
+        filepath = scanner.nextLine();
+        
+        points = rf.read(filepath);
         WriteToXLS xls = new WriteToXLS();
         xls.createSheet();
         xls.writePointsToFile(points);
