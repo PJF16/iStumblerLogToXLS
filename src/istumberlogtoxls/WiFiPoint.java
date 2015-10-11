@@ -30,6 +30,16 @@ public class WiFiPoint {
         this.encryption = encryption;
         this.location = location;
     }
+    
+    public WiFiPoint (WiFiPoint p) {
+        this.date=p.date;
+        this.time=p.time;
+        this.type=p.type;
+        this.name=p.name;
+        this.bssid=p.bssid;
+        this.encryption=p.encryption;
+        this.location=p.location;
+    }
 
     WiFiPoint() {
     }
