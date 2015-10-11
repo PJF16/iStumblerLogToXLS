@@ -80,7 +80,6 @@ public class WriteToXLS {
             int rowCount = 1;
             Label date, time, name, bssid, encryption, location;
             for (WiFiPoint p : pointArray) {
-                System.out.println(p.getName());
                 sheet.addCell(new Label(0, rowCount, p.getDate()));
                 sheet.addCell(new Label(1, rowCount, p.getTime()));
                 sheet.addCell(new Label(2, rowCount, p.getType()));
