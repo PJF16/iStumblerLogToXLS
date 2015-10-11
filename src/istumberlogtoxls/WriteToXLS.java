@@ -35,9 +35,9 @@ public class WriteToXLS {
         //this.createFile();
     }
 
-    public void createSheet() {
+    public void createSheet(String outputpath) {
         try {
-            this.createFile();
+            this.createFile(outputpath);
         } catch (IOException ex) {
             Logger.getLogger(WriteToXLS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BiffException ex) {
@@ -47,8 +47,8 @@ public class WriteToXLS {
         }
     }
 
-    private void createFile() throws IOException, BiffException, WriteException {
-        this.wb = Workbook.createWorkbook(new File("output.xls"));
+    private void createFile(String outputpath) throws IOException, BiffException, WriteException {
+        this.wb = Workbook.createWorkbook(new File(outputpath));
         this.sheet = wb.createSheet("WiFi Points", 0);
 
         Label date = new Label(0, 0, "Date");
