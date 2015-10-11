@@ -53,9 +53,10 @@ public class ReadFileAndAnalyse {
 
                     this.point.setEncryption(help.substring(0, help.indexOf(",")));
                     help = help.substring(help.indexOf(",") + 1);
-
-                    this.pointArray.add(new WiFiPoint(point));
-                } else if (strLine.contains("LocationUpdate")) {
+                    
+                    if (!this.duplicateCheck(point))
+                        pointArray.add(new WiFiPoint(point));
+                } else if (strLine.contains("LocationUpdate") && !strLine.contains("Restricted")) {
                     this.point.setLocation(strLine.substring(35, 54));
                 }
               //testing only
@@ -87,6 +88,17 @@ public class ReadFileAndAnalyse {
         
          //**************/
         return this.pointArray;
+    }
+    
+    public boolean duplicateCheck (WiFiPoint p) {
+        for (WiFiPoint check : this.pointArray) {
+            if (check.getBssid().equals(p.getBssid())) {
+                return true;
+            }
+        }
+        
+        return false;
+        
     }
 
 }
