@@ -53,13 +53,14 @@ public class ReadFileAndAnalyse {
 
                     this.point.setEncryption(help.substring(0, help.indexOf(",")));
                     help = help.substring(help.indexOf(",") + 1);
-                    
-                    if (!this.duplicateCheck(point))
+
+                    if (!this.duplicateCheck(point)) {
                         pointArray.add(new WiFiPoint(point));
+                    }
                 } else if (strLine.contains("LocationUpdate") && !strLine.contains("Restricted")) {
                     this.point.setLocation(strLine.substring(35, 54));
                 }
-              //testing only
+                //testing only
                 //System.out.println(point.getName());
 
             }
@@ -69,36 +70,18 @@ public class ReadFileAndAnalyse {
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
-        /*testing
-         try {
-            
-         WriteToXLS xls = new WriteToXLS ();
-         xls.createSheet();
-            
-         xls.writePointsToFile(pointArray);
-         xls.closeWorkBook();
-         } catch (IOException ex) {
-         Logger.getLogger(ReadFileAndAnalyse.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (BiffException ex) {
-         Logger.getLogger(ReadFileAndAnalyse.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (WriteException ex) {
-         Logger.getLogger(ReadFileAndAnalyse.class.getName()).log(Level.SEVERE, null, ex);
-         }
-        
-        
-         //**************/
         return this.pointArray;
     }
-    
-    public boolean duplicateCheck (WiFiPoint p) {
+
+    public boolean duplicateCheck(WiFiPoint p) {
         for (WiFiPoint check : this.pointArray) {
             if (check.getBssid().equals(p.getBssid())) {
                 return true;
             }
         }
-        
+
         return false;
-        
+
     }
 
 }
