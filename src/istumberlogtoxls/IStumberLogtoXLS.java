@@ -23,17 +23,21 @@ public class IStumberLogtoXLS {
      */
     public static void main(String[] args) throws IOException, BiffException, WriteException {
         ReadFileAndAnalyse rf = new ReadFileAndAnalyse ();
-        Scanner scanner = new Scanner (System.in);
-        ArrayList<WiFiPoint> points;
-        String filepath;
-        System.out.println("Bitte geben Sie den kompletten Pfad zur Logdatei ein: ");
-        filepath = scanner.nextLine();
-        
-        points = rf.read(filepath);
-        WriteToXLS xls = new WriteToXLS();
-        xls.createSheet();
-        xls.writePointsToFile(points);
-        xls.closeWorkBook();
+        try (Scanner scanner = new Scanner (System.in)) {
+            ArrayList<WiFiPoint> points;
+            String filepath, outputpath;
+            System.out.println("Please enter the path to the log file: ");
+            filepath = scanner.nextLine();
+            points = rf.read(filepath);
+            WriteToXLS xls = new WriteToXLS();
+            scanner.reset();
+            //doesn't work by now outputpath = scanner.nextLine();
+            outputpath = "/Users/philipp/outputwifi.xls";
+            xls.createSheet(outputpath);
+            xls.writePointsToFile(points);
+            xls.closeWorkBook();
+            scanner.close();
+        }
     }
     
 }
